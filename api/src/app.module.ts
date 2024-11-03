@@ -9,6 +9,7 @@ import { InputModule } from './dataset/input.module';
 import { Input } from './dataset/entities/input.entity';
 import { Fraud } from './fraud/entities/fruad.entity';
 import { FraudModule } from './fraud/fraud.module';
+import { ProducerModule } from './producer/producer.module';
 
 const models = [User, Input, Fraud];
 
@@ -33,7 +34,8 @@ const models = [User, Input, Fraud];
     JwtModule,
     AuthModule,
     InputModule,
-    FraudModule
+    FraudModule,
+    ProducerModule
   ],
   controllers: []
 })
