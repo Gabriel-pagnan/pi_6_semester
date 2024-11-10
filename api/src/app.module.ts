@@ -28,6 +28,11 @@ const models = [User, Input, Fraud];
       logging: false,
       autoLoadModels: Boolean(process.env.DATABASE_UPGRADE) || false,
       synchronize: Boolean(process.env.DATABASE_UPGRADE) || false,
+      dialectOptions: {
+        ssl: {
+          rejectUnauthorized: false,
+        }
+      }
     }),
     UserModule,
     JwtModule,
