@@ -4,8 +4,8 @@ export class CreateInputDTO {
     @IsDateString()
     public trans_date_trans_time: Date;
 
-    @IsNumber()
-    public cc_num: number;
+    @IsString()
+    public cc_num: string;
 
     @IsString()
     public merchant: string;

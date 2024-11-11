@@ -3,7 +3,7 @@ import { Input } from "../../dataset/entities/input.entity";
 export class ReturnInputDTO {
     id?: number;
     trans_date_trans_time: Date;
-    cc_num: number;
+    cc_num: string;
     merchant: string;
     category: string;
     amt: number;
@@ -24,7 +24,7 @@ export class ReturnInputDTO {
     constructor(input: Partial<Input>) {
         this.id = input.id;
         this.trans_date_trans_time = input.trans_date_trans_time ?? new Date();
-        this.cc_num = input.cc_num ?? 0;
+        this.cc_num = input.cc_num ?? '';
         this.merchant = input.merchant ?? '';
         this.category = input.category ?? '';
         this.amt = input.amt ?? 0;
