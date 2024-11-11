@@ -10,7 +10,7 @@ export class ProducerService {
         this.client = ClientProxyFactory.create({
             transport: Transport.RMQ,
             options: {
-                urls: ['amqp://localhost:5672'],
+                urls: ['clustering://rabbitmq-i7vq.onrender.com:25672'],
                 queue: 'ml_processing_queue',
                 queueOptions: { durable: true },
             },
@@ -20,7 +20,7 @@ export class ProducerService {
     async sendToML(data: CreateMlDTO) {
         try {
             if (!data) return;
-            return await this.client.emit('ml.process', data).toPromise();
+            return await this.client.send('ml.process', data).toPromise();
         } catch (error) {
             new InternalServerErrorException(error);
         }

@@ -5,10 +5,10 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
   imports: [
     ClientsModule.register([
       {
-        name: 'MESSAGE_SERVICE',
+        name: 'rabbitmq',
         transport: Transport.RMQ,
         options: {
-          urls: ['ampq://localhost:5672'],
+          urls: ['amqp://rabbitmq-i7vq.onrender.com:5672'],
           queue: 'ml_results_queue',
           queueOptions: { durable: true }
         }

@@ -5,8 +5,8 @@ export class Input extends Model {
     @Column({ field: 'trans_date_trans_time' })
     trans_date_trans_time: Date;
 
-    @Column({ field: 'cc_num', type: DataType.INTEGER })
-    cc_num: number;
+    @Column({ field: 'cc_num', type: DataType.STRING })
+    cc_num: string;
 
     @Column({ field: 'merchant' })
     merchant: string;
