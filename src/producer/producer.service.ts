@@ -1,28 +1,33 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
-import { ClientProxy, ClientProxyFactory, Transport } from '@nestjs/microservices';
 import { CreateMlDTO } from './dtos/create-ml.dto';
+import { ServiceBusClient, ServiceBusMessage } from '@azure/service-bus';
 
 @Injectable()
 export class ProducerService {
-    private client: ClientProxy;
+    private serviceBusClient: ServiceBusClient;
+    private sender: any;
 
     constructor() {
-        this.client = ClientProxyFactory.create({
-            transport: Transport.RMQ,
-            options: {
-                urls: ['clustering://rabbitmq-i7vq.onrender.com:25672'],
-                queue: 'ml_processing_queue',
-                queueOptions: { durable: true },
-            },
-        });
+        this.serviceBusClient = new ServiceBusClient(process.env.CONNECTION_STRING);
+        this.sender = this.serviceBusClient.createSender("ml_processing_hub");
     }
-
     async sendToML(data: CreateMlDTO) {
         try {
             if (!data) return;
-            return await this.client.send('ml.process', data).toPromise();
+            
+            const message: ServiceBusMessage = {
+                body: data,
+                contentType: "application/json",
+            };
+
+            await this.sender.sendMessages(message);
+            console.log("Message sent successfully.");
         } catch (error) {
-            new InternalServerErrorException(error);
+            throw new InternalServerErrorException(error);
         }
+    }
+
+    async onModuleDestroy() {
+        await this.serviceBusClient.close();
     }
 }

@@ -4,7 +4,7 @@ export class CreateInputDTO {
     @IsDateString()
     public trans_date_trans_time: Date;
 
-    @IsNumber()
+    @IsString()
     public cc_num: string;
 
     @IsString()
