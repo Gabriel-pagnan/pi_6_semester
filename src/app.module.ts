@@ -9,6 +9,9 @@ import { InputModule } from './dataset/input.module';
 import { Input } from './dataset/entities/input.entity';
 import { Fraud } from './fraud/entities/fruad.entity';
 import { FraudModule } from './fraud/fraud.module';
+import { ProducerModule } from './producer/producer.module';
+import { ConsumerModule } from './consumer/consumer.module';
+import { MessagingModule } from './messaging/messaging.module';
 
 const models = [User, Input, Fraud];
 
@@ -28,17 +31,20 @@ const models = [User, Input, Fraud];
       logging: false,
       autoLoadModels: Boolean(process.env.DATABASE_UPGRADE) || false,
       synchronize: Boolean(process.env.DATABASE_UPGRADE) || false,
-      dialectOptions: {
-        ssl: {
-          rejectUnauthorized: false,
-        }
-      }
+      // dialectOptions: {
+      //   ssl: {
+      //     rejectUnauthorized: false,
+      //   }
+      // }
     }),
     UserModule,
     JwtModule,
     AuthModule,
     InputModule,
-    FraudModule
+    FraudModule,
+    ProducerModule,
+    ConsumerModule,
+    MessagingModule
   ],
   controllers: []
 })

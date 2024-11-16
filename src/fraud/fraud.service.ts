@@ -41,7 +41,6 @@ export class FraudService {
                 raw: true
             });
 
-            console.log(isFraud);
             if (!isFraud) throw new NotFoundException('Not Found.');
 
             return isFraud
